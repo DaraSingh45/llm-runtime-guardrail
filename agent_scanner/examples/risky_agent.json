@@ -1,0 +1,21 @@
+{
+  "agent_name": "auto-remediation-experiment-agent",
+  "tools": [
+    {
+      "name": "run_shell_command",
+      "type": "shell",
+      "requires_human_approval": false
+    },
+    {
+      "name": "fetch_any_url",
+      "type": "network",
+      "allowed_hosts": ["*"],
+      "credential_scopes": ["admin"]
+    },
+    {
+      "name": "write_any_file",
+      "type": "filesystem",
+      "allow_write": true
+    }
+  ]
+}

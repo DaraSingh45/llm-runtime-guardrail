@@ -1,0 +1,286 @@
+[
+  {
+    "agent_name": "ticket-triage-agent",
+    "tools": [
+      {
+        "name": "read_tickets",
+        "type": "filesystem",
+        "allowed_paths": [
+          "/data/tickets/read-only"
+        ],
+        "allow_write": false
+      },
+      {
+        "name": "call_zendesk_api",
+        "type": "network",
+        "allowed_hosts": [
+          "zendesk.example.com"
+        ],
+        "rate_limit_per_minute": 30,
+        "credential_scopes": [
+          "tickets:read"
+        ]
+      }
+    ]
+  },
+  {
+    "agent_name": "kb-search-agent",
+    "tools": [
+      {
+        "name": "search_kb",
+        "type": "network",
+        "allowed_hosts": [
+          "kb-internal.example.com"
+        ],
+        "credential_scopes": [
+          "kb:read"
+        ],
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "file-organizer-agent",
+    "tools": [
+      {
+        "name": "organize_files",
+        "type": "filesystem",
+        "allow_write": false,
+        "allowed_paths": [
+          "__NEEDS_REVIEW__"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "backup-agent",
+    "tools": [
+      {
+        "name": "backup_to_s3",
+        "type": "network",
+        "allowed_hosts": [
+          "__NEEDS_REVIEW__"
+        ],
+        "rate_limit_per_minute": 10,
+        "credential_scopes": [
+          "backup:write"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "devops-helper-agent",
+    "tools": [
+      {
+        "name": "run_deploy_script",
+        "type": "shell",
+        "requires_human_approval": true,
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "data-export-agent",
+    "tools": [
+      {
+        "name": "export_data",
+        "type": "network",
+        "allowed_hosts": [
+          "partner-api.example.com"
+        ],
+        "rate_limit_per_minute": 20,
+        "credential_scopes": [
+          "__NEEDS_REVIEW__"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "internal-search-agent",
+    "tools": [
+      {
+        "name": "search_internal_docs",
+        "type": "network",
+        "allowed_hosts": [
+          "search-internal.example.com"
+        ],
+        "rate_limit_per_minute": 60,
+        "credential_scopes": [
+          "docs:read"
+        ]
+      }
+    ]
+  },
+  {
+    "agent_name": "legacy-scraper-agent",
+    "tools": [
+      {
+        "name": "scrape_web",
+        "type": "network",
+        "allowed_hosts": [
+          "__NEEDS_REVIEW__"
+        ],
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "multi-tool-ops-agent",
+    "tools": [
+      {
+        "name": "run_cleanup_script",
+        "type": "shell",
+        "requires_human_approval": true,
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      },
+      {
+        "name": "write_logs",
+        "type": "filesystem",
+        "allowed_paths": [
+          "/var/log/ops-agent"
+        ],
+        "allow_write": true
+      },
+      {
+        "name": "call_metrics_api",
+        "type": "network",
+        "allowed_hosts": [
+          "metrics-internal.example.com"
+        ],
+        "rate_limit_per_minute": 120,
+        "credential_scopes": [
+          "metrics:write"
+        ]
+      }
+    ]
+  },
+  {
+    "agent_name": "admin-bot-agent",
+    "tools": [
+      {
+        "name": "manage_users",
+        "type": "network",
+        "allowed_hosts": [
+          "__NEEDS_REVIEW__"
+        ],
+        "rate_limit_per_minute": 10,
+        "credential_scopes": [
+          "__NEEDS_REVIEW__"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "rogue-experiment-agent",
+    "tools": [
+      {
+        "name": "run_arbitrary_code",
+        "type": "shell",
+        "requires_human_approval": true,
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      },
+      {
+        "name": "fetch_any_url",
+        "type": "network",
+        "allowed_hosts": [
+          "__NEEDS_REVIEW__"
+        ],
+        "credential_scopes": [
+          "__NEEDS_REVIEW__"
+        ],
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      },
+      {
+        "name": "write_any_file",
+        "type": "filesystem",
+        "allow_write": false,
+        "allowed_paths": [
+          "__NEEDS_REVIEW__"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "reporting-agent",
+    "tools": [
+      {
+        "name": "generate_report",
+        "type": "filesystem",
+        "allowed_paths": [
+          "/data/reports"
+        ],
+        "allow_write": true
+      },
+      {
+        "name": "send_email",
+        "type": "network",
+        "allowed_hosts": [
+          "smtp-internal.example.com"
+        ],
+        "rate_limit_per_minute": 30,
+        "credential_scopes": [
+          "email:send"
+        ]
+      }
+    ]
+  },
+  {
+    "agent_name": "ci-deploy-agent",
+    "tools": [
+      {
+        "name": "trigger_pipeline",
+        "type": "shell",
+        "requires_human_approval": true,
+        "rate_limit_per_minute": 5
+      }
+    ]
+  },
+  {
+    "agent_name": "credential-vault-agent",
+    "tools": [
+      {
+        "name": "rotate_secrets",
+        "type": "network",
+        "allowed_hosts": [
+          "vault-internal.example.com"
+        ],
+        "rate_limit_per_minute": 10,
+        "credential_scopes": [
+          "__NEEDS_REVIEW__"
+        ],
+        "needs_review": true
+      }
+    ]
+  },
+  {
+    "agent_name": "sandbox-test-agent",
+    "tools": [
+      {
+        "name": "run_test_script",
+        "type": "shell",
+        "requires_human_approval": true,
+        "rate_limit_per_minute": 10,
+        "needs_review": true
+      },
+      {
+        "name": "read_test_fixtures",
+        "type": "filesystem",
+        "allowed_paths": [
+          "/data/fixtures"
+        ],
+        "allow_write": false
+      }
+    ]
+  }
+]

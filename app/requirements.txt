@@ -1,0 +1,20 @@
+fastapi==0.138.2
+uvicorn[standard]==0.49.0
+pydantic==2.13.4
+prometheus-client==0.25.0
+prometheus-fastapi-instrumentator==8.0.2
+scikit-learn==1.8.0
+joblib==1.5.3
+httpx==0.28.1
+
+# Optional NER layer for the DLP scanner. After installing, run:
+#   python -m spacy download en_core_web_sm
+# The DLP scanner works fully (structured regex layer: API keys, AWS
+# credentials, JWTs, credit cards, private keys, emails) without this --
+# it only adds the lower-confidence PERSON/ORG/GPE entity signal.
+spacy==3.8.14
+
+# Only needed if LLM_BACKEND=anthropic. Loose version constraint since
+# this path isn't exercised by the test suite (it requires a real API key) --
+# pin it exactly once you've verified it against the SDK version you use.
+anthropic>=0.69.0
