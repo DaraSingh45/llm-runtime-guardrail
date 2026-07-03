@@ -132,10 +132,7 @@ make redteam      # run the full held-out payload set, see the real numbers
 Grafana: http://localhost:3000 (anonymous access enabled) · Prometheus: http://localhost:9090
 
 By default `LLM_BACKEND=mock` -- a deterministic canned responder, so the
-entire security pipeline is fully testable with zero API key. Set
-`LLM_BACKEND=anthropic` and `ANTHROPIC_API_KEY` in `.env` to call the real
-Claude API instead; nothing in the detection pipeline needs to change.
-
+entire security pipeline is fully testable with zero API key.
 ## Sidecar Deployment Pattern
 
 ```bash
