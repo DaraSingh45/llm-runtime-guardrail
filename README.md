@@ -108,7 +108,7 @@ fails soft, and the honest list of what's simplified for portfolio scale.
 ## Quickstart
 
 ```bash
-git clone https://github.com/DaraSingh45/llm-runtime-guardrail
+git clone https://github.com/DaraSingh45/llm-runtime-guardrail.git
 cd llm-runtime-guardrail
 
 cp .env.example .env
